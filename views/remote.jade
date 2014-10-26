@@ -1,0 +1,26 @@
+//Created by Chad on 10/19/2014.
+doctype html
+html
+    head
+        script(src='http://simplewebrtc.com/latest.js')
+        style.
+            #remoteVideos video {
+            height: 98%;
+            position: absolute;
+            z-index: 0}
+            h1 {text-align: center }
+
+    body
+        //video#localVideo
+        h1 You have an alert
+        #remoteVideos
+        script.
+            var webrtc = new SimpleWebRTC({
+            localVideoEl: 'localVideo',
+            remoteVideosEl: 'remoteVideos',
+            media: {audio: true, video: false},
+            autoRequestMedia: true});
+            webrtc.on('readyToCall', function () {var gotoRoom = !{JSON.stringify(room)};
+            webrtc.joinRoom(gotoRoom);
+            console.log('Joined room ' + gotoRoom);
+            });

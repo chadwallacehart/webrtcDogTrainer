@@ -1,0 +1,19 @@
+//
+   Created by Chad on 10/25/2014.
+
+doctype html
+html
+    head
+        title Socket test
+    body
+        script(src="/socket.io/socket.io.js")
+        script.
+            io = io.connect();
+            io.on('connect', function(){
+            console.log("socket.io connected");
+            });
+            io.emit('ready');
+            io.on('talk', function(data) {
+            alert(data.message)
+            })
+

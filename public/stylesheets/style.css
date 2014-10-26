@@ -1,0 +1,45 @@
+/*taken from https://github.com/webrtcHacks/cssMirror */
+#content{
+    position: absolute;
+    height: 98%;
+    width: 98%
+}
+#stats{
+    position: absolute;
+    left: 2px;
+    z-index: 1;
+}
+video{
+    position: absolute;
+    height: 100%;
+
+    transform: scale(-1, 1);            /*For Firefox (& IE) */
+    -webkit-transform: scale(-1, 1);     /*for Chrome & Opera (& Safari) */
+}
+table, th, td {
+    border: 1px solid grey;
+    border-collapse: collapse;
+    text-align: right;
+}
+td:first-child{
+    text-align: left;
+}
+button{
+    position: relative;
+    margin-top: 20px;
+    left: 5px;
+    font-weight: bold;
+    font-size: 16pt;
+    height: 50px;
+    width: 80px;
+    padding: 5px;
+    z-index: 3;
+    display: none;
+}
+#startButton{
+    background-color: #29f352;
+}
+#stopButton{
+    color: #fbfbfb;
+    background-color: #ff4f14;
+}
