@@ -16,17 +16,7 @@ var client = require('twilio')(accountSid, authToken);
 var twilioPhone = process.env.twilioPhone;
 
 exports.mms = function(msg, to, url){
-/*
-    var mediaLink;
 
-    if(process.env.NODE_ENV === 'development'){
-        mediaLink = 'http://upload.wikimedia.org/wikipedia/commons/f/f7/UKC_Olde_English_Bulldogge_at_8_years_old.jpg';
-    }
-    else{
-        mediaLink = app.get('fullHostUrl') + '/' + sid + '.png';
-    }
-    debug("Media file is: " + mediaLink);
-*/
     client.messages.create({
         to: to,
         from: twilioPhone,

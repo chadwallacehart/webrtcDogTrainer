@@ -2,6 +2,8 @@ var debug = require('debug')('webrtcDogRemover');
 var express = require('express.io')();
 var router = express.http(); //.io();
 
+var sids = [];  //storage for our session ID's
+
 /* GET home page. */
 router.get('/', function(req, res) {
     debug("Main monitor page - " + req.session.id);
@@ -12,6 +14,7 @@ router.get('/', function(req, res) {
 router.get('/monitor', function(req, res) {
     debug("Main monitor page - " + req.session.id);
     res.render('monitor', {sessId: req.session.id});
+    sids.push(req.session.id);
 });
 
 router.get('/remote/:room', function(req, res) {
@@ -34,7 +37,39 @@ if(router.get('env') === 'development') {
     });
 }
 
-//TO DO: figure why I need this
+//serve images url for twilio MMS based on ssid
+router.get('/img/:imageId', function(req, res){
+
+    var imageId = req.params.imageId;
+    //var ssidCheck = fileName.split('.')[0];
+    debug("ssidCheck: +" + imageId);
+
+    if (ssids.indexOf(imageId) == -1) {
+        res.render('404');
+    }
+    else{
+        var options = {
+            root: __dirname + '/uploads/',
+            dotfiles: 'deny',
+            headers: {
+                'x-timestamp': Date.now(),
+                'x-sent': true
+            }
+        };
+
+        res.sendfile(imageId + '.png', options, function (err) {
+            if (err) {
+                console.log(err);
+                res.status(err.status).end();
+            }
+            else {
+                debug('Sent:', fileName + '.png');
+            }
+        });
+    }
+});
+
+//returns a page with the video file
 router.get('/video/:fileName', function(req, res) {
     var fileName = req.params.fileName;
 

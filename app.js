@@ -6,12 +6,15 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var debug = require('debug')('webrtcDogRemover');
+var twilioapp = require('./twilioapp');
+var fs = require('fs');
 
 var app = express();
+app.http().io();
 
 var routes = require('./routes/index');
 var twilioRoutes = require('./routes/twilio');
-var socketRoutes = require('./routes/socket');
+var socketRoutes = require('./routes/socket')(app);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -25,8 +28,94 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.session({secret: process.env.sessionSecret}));
 
+//TO DO - change this into a dynamic route
+//app.use(express.static(path.join(__dirname, 'uploads')));
 
-/*
+/********************ROUTES****************************/
+
+app.use('/', routes);
+app.use('/', twilioRoutes);
+
+//object to make sure routes don't get flooded by teh same session
+var fileNames = [];
+
+//Wasn't able to get these to work in a separate route module
+app.io.route('image', function(req){
+
+    var sid = req.session.id;
+    var filetype = 'png';
+    var filename = sid + '.'+ filetype;
+
+    //only allow one alert per session for now
+    if (fileNames.indexOf(filename) != -1){
+        debug("repeat Image alert attempt");
+        return
+    }
+    else{
+        fileNames.push(filename);
+    }
+
+    req.io.emit('status', "saving image");
+    writeToDisk(req.data.dataURL, sid + '.'+ filetype);
+
+    var mediaUrl;
+    if(process.env.NODE_ENV === 'development'){
+        mediaUrl= 'https://www.petlegaciesbcs.com/wp-content/uploads/2014/07/english-bulldog-6-years-old-sitting-in-front-of-white-background.jpg';
+    }
+    else{
+        mediaUrl = app.get('fullHostUrl') + '/' + sid;
+    }
+
+    debug("MMS mediaUrl: " + mediaUrl );
+
+    var msg = "Your dog is on the couch! Go here to see:\n" + app.get('fullHostUrl') + '/remote/' + sid;
+    twilioapp.mms(msg, process.env.testPhone, mediaUrl);
+});
+
+app.io.route('video', function(req){
+
+    debug("incoming socket - video");
+    req.io.emit('status', "saving video");
+
+    //To DO: write the filename based on teh data.audio.type
+    var filetype = 'webm';
+    //fileId = uuid.v4();
+    //fileName = fileId + '.' + filetype;
+
+    fileName = req.session.id + '.' + filetype;
+
+    writeToDisk(req.data.audio.dataURL, fileName);
+
+    // if it is chrome
+    if (req.data.video) {
+        writeToDisk(req.data.video.dataURL, fileName);
+        //merge(socket, fileName);  //replace this if  want to use audio with Chrome
+    }
+    req.io.emit('open video', app.get('fullHostUrl') + '/' + fileName);
+
+});
+
+function writeToDisk(dataURL, fileName) {
+    debug("About to write " + fileName);
+
+    var fileExtension = fileName.split('.').pop(),
+        fileRootNameWithBase = './uploads/' + fileName,
+        filePath = fileRootNameWithBase,
+        fileID = 2,
+        fileBuffer;
+
+    while (fs.existsSync(filePath)) {
+        filePath = fileRootNameWithBase + '(' + fileID + ').' + fileExtension;
+        fileID += 1;
+    }
+
+    dataURL = dataURL.split(',').pop();
+    fileBuffer = new Buffer(dataURL, 'base64');
+    fs.writeFileSync(filePath, fileBuffer);
+
+    debug('filePath:' +  filePath);
+}
+
 //just for testing Socket.io
 if(app.get('env') === 'development') {
 
@@ -34,13 +123,9 @@ if(app.get('env') === 'development') {
         app.io.set('log level 1');
     });
 
-    var urlMsg;
-
     app.get('/socket', function (req, res) {
         res.render('sockettest');
         urlMsg = req.params.message;
-        //req.io.route('ready');
-        app.io.emit("talk", "socket server started");
     });
 
     app.io.route('ready', function(req){
@@ -49,14 +134,9 @@ if(app.get('env') === 'development') {
     })
 }
 
-*/
-
-app.use('/', routes);
-app.use('/', twilioRoutes);
-app.use('/', socketRoutes);
+//app.use('/', socketRoutes);
 //app.use('/users', users);
 
-app.http().io();
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

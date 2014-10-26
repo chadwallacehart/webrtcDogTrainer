@@ -29,29 +29,4 @@ if(router.get('env') === 'development') {
     });
 }
 
-//serve images url for twilio MMS
-router.get('/img/:fileName', function(req, res){
-
-    var fileName = req.params.fileName;
-    var options = {
-        root: __dirname + '/uploads/',
-        dotfiles: 'deny',
-        headers: {
-            'x-timestamp': Date.now(),
-            'x-sent': true
-        }
-    };
-
-    res.sendfile(fileName + '.png', options, function (err) {
-        if (err) {
-            console.log(err);
-            res.status(err.status).end();
-        }
-        else {
-            console.log('Sent:', fileName + '.png');
-        }
-    });
-
-});
-
 module.exports = router;

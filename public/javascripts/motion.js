@@ -57,22 +57,26 @@
     }
 
     var t;  //timeout var
-
+    var state = "stopped";
 
     this.start = function(){
+        state = "running";
         motionDetection();
     };
 
     this.stop = function(){
-        console.log("Motion detector off");
+        state = "stopped";
         clearTimeout(t);
         times = [];
+        console.log("Motion detector off");
     };
 
     // Initiate motion detect to scan video five times a second
     function motionDetection() {
+        if(state == "running"){
             var sawMotion = compareFrames();
             t=setTimeout( motionDetection, sawMotion?1000:200);  //was 1000:250
+        }
     }
 
 

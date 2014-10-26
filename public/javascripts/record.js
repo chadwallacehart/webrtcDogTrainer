@@ -25,24 +25,32 @@ $('#startButton').click(function() {
     $(window).on('alert', function(){
         console.log('Alert');
 
-        window.recordRTC = RecordRTC(mediastream);
-        recordRTC.startRecording();
+//        window.recordRTC = RecordRTC(mediastream);
+//        recordRTC.startRecording();
 
         webrtc.joinRoom(sid);
         console.log("just joined - " + sid);
 
         takePicture($("#localVideo")[0]);
 
-        //$('#stopButton').hide();
-        stop();
+        motion.stop();
+
+        $('#startButton').show();
+        $('#stopButton').hide();
+
     });
 });
 
 $('#stopButton').click(function() {
     $('#startButton').show();
     $('#stopButton').hide();
-    stop();
+    motion.stop();
+    $('#startButton').show();
+    $('#stopButton').hide();
 });
+
+
+//socket.on('record', function(){});
 
 function stop(){
     motion.stop();
@@ -59,13 +67,13 @@ function stop(){
             };
             socketio.emit('video', files);
 
-            console.log("file type is" + recordRTC.getBlob().type);
+            console.log("file type is " + recordRTC.getBlob().type);
         });
     });
 }
 
 //server should send the video file URL
-socketio.on('finished', function(message){
+socketio.on('open video', function(message){
     console.log("Server message: " + message);
     window.open(message);
 });
