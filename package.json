@@ -14,11 +14,15 @@
     "debug": "~2.0.0",
     "ejs": "~0.8.5"
   },
-    "keywords": [
-        "WebRTC",
-        "webrtcHacks",
-        "Tessel"
-    ],
-    "author": "Chad Wallace Hart",
-    "license": "MIT"
+  "keywords": [
+    "WebRTC",
+    "webrtcHacks",
+    "Tessel"
+  ],
+  "author": "Chad Wallace Hart",
+  "license": "MIT",
+  "subdomain": "chadwallacehart-webrtcDogRemover",
+  "engines": {
+    "node": "0.10.x"
+  }
 }

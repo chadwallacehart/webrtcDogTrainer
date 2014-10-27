@@ -81,7 +81,7 @@ app.io.route('image', function(req){
     debug("MMS mediaUrl: " + mediaUrl );
 
     var msg = "Your dog is on the couch! Go here to see:\n" + app.get('fullHostUrl') + '/remote/' + sid;
-    //twilioapp.mms(msg, process.env.testPhone, mediaUrl);
+    twilioapp.mms(msg, process.env.testPhone, mediaUrl);
 });
 
 app.io.route('video', function(req){
