@@ -59,7 +59,7 @@ REST url:<input id="restUrl" type="text"/>
     $("#stop").click(function(){
         console.log("stop");
         socketio.emit("command", {command: "stop", room: room});
-        this.prop("disabled",true)
+        $("#stop").prop("disabled",true)
     });
 
 </script>

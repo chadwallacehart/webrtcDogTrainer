@@ -75,7 +75,7 @@ app.io.route('image', function(req){
         mediaUrl= 'https://www.petlegaciesbcs.com/wp-content/uploads/2014/07/english-bulldog-6-years-old-sitting-in-front-of-white-background.jpg';
     }
     else{
-        mediaUrl = app.get('fullHostUrl') + '/' + sid;
+        mediaUrl = app.get('fullHostUrl') + '/image/' + sid;
     }
 
     debug("MMS mediaUrl: " + mediaUrl );
