@@ -63,7 +63,7 @@ router.get('/image/:imageId', function(req, res){
             res.status(err.status).end();
         }
         else {
-            debug('Sent:', fileName + '.png');
+            debug('Sent:', imageId + '.png');
         }
     });
 });
@@ -83,7 +83,7 @@ router.get('/video/:fileName', function(req, res) {
 
     res.sendfile(fileName, options, function (err) {
         if (err) {
-            console.log(err);
+            debug(err);
             res.status(err.status).end();
         }
         else {

@@ -91,8 +91,6 @@ app.io.route('video', function(req){
 
     //To DO: write the filename based on teh data.audio.type
     var filetype = 'webm';
-    //fileId = uuid.v4();
-    //fileName = fileId + '.' + filetype;
 
     fileName = req.session.id + '.' + filetype;
 
@@ -103,6 +101,7 @@ app.io.route('video', function(req){
         writeToDisk(req.data.video.dataURL, fileName);
         //merge(socket, fileName);  //replace this if  want to use audio with Chrome
     }
+    debug("recording url:" + app.get('fullHostUrl') + '/video/' + fileName);
     req.io.room(req.session.id).broadcast('videoReady', app.get('fullHostUrl') + '/video/' + fileName);
 
 });
