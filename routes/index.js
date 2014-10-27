@@ -41,36 +41,31 @@ if(router.get('env') === 'development') {
 }
 
 //serve images url for twilio MMS based on ssid
-router.get('/img/:imageId', function(req, res){
+router.get('/image/:imageId', function(req, res){
 
     var imageId = req.params.imageId;
     //var ssidCheck = fileName.split('.')[0];
     debug("ssidCheck: +" + imageId);
 
-    if (ssids.indexOf(imageId) == -1) {
-        res.render('404');
-    }
-    else{
-        var options = {
-            //root: __dirname + '../uploads/',
-            root: rootDir + '/uploads/',
-            dotfiles: 'deny',
-            headers: {
-                'x-timestamp': Date.now(),
-                'x-sent': true
-            }
-        };
+    var options = {
+        //root: __dirname + '../uploads/',
+        root: rootDir + '/uploads/',
+        dotfiles: 'deny',
+        headers: {
+            'x-timestamp': Date.now(),
+            'x-sent': true
+        }
+    };
 
-        res.sendfile(imageId + '.png', options, function (err) {
-            if (err) {
-                console.log(err);
-                res.status(err.status).end();
-            }
-            else {
-                debug('Sent:', fileName + '.png');
-            }
-        });
-    }
+    res.sendfile(imageId + '.png', options, function (err) {
+        if (err) {
+            debug(err);
+            res.status(err.status).end();
+        }
+        else {
+            debug('Sent:', fileName + '.png');
+        }
+    });
 });
 
 //returns a page with the video file

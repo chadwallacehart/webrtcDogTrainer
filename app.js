@@ -57,7 +57,7 @@ app.io.route('image', function(req){
     var sid = req.session.id;
     var filetype = 'png';
     var filename = sid + '.'+ filetype;
-
+/*
     //only allow one alert per session for now
     if (fileNames.indexOf(filename) != -1){
         debug("repeat Image alert attempt");
@@ -66,7 +66,7 @@ app.io.route('image', function(req){
     else{
         fileNames.push(filename);
     }
-
+*/
     req.io.emit('status', "saving image");
     writeToDisk(req.data.dataURL, sid + '.'+ filetype);
 
