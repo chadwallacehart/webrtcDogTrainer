@@ -3,9 +3,14 @@ var debug = require('debug')('webrtcDogRemover');
 var app = require('../app');
 
 app.set('port', process.env.PORT || 3000);
-var hostUrl = process.env.hostPath + ':' +  app.get('port');
 
-app.set('fullHostUrl', process.env.hostPath + ':' +  app.get('port'));
+
+if(process.env.NODE_ENV === 'development') {
+    app.set('fullHostUrl', process.env.hostPath + ':' + app.get('port'));
+}
+else{
+    app.set('fullHostUrl', process.env.hostPath);
+}
 
 var server = app.listen(app.get('port'), function() {
   debug('Express server listening on  ' + app.get('fullHostUrl')); //server.address().port);
