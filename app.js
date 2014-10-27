@@ -5,16 +5,16 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var fs = require('fs');
 var debug = require('debug')('webrtcDogRemover');
 var twilioapp = require('./twilioapp');
-var fs = require('fs');
 
 var app = express();
 app.http().io();
 
 var routes = require('./routes/index');
 var twilioRoutes = require('./routes/twilio');
-var socketRoutes = require('./routes/socket')(app);
+//var socketRoutes = require('./routes/socket')(app); //moved to below
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -25,11 +25,8 @@ app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));    //this not working
 app.use(express.session({secret: process.env.sessionSecret}));
-
-//TO DO - change this into a dynamic route
-//app.use(express.static(path.join(__dirname, 'uploads')));
 
 /********************ROUTES****************************/
 
@@ -38,6 +35,21 @@ app.use('/', twilioRoutes);
 
 //object to make sure routes don't get flooded by teh same session
 var fileNames = [];
+
+// Setup the ready route, join room and broadcast to room.
+app.io.route('join', function(req) {
+    req.io.join(req.data);
+    req.io.room(req.data).broadcast('announce', {
+        message: 'New client in the ' + req.data + ' room.'
+    });
+    debug("New client in the " + req.data + " room. ");
+});
+
+app.io.route('command', function(req){
+    debug("command: " + req.data.command + " for room " + req.data.room);
+    //@ToDo - get the right room ID
+    req.io.room(req.data.room).broadcast("command", req.data.command);
+});
 
 //Wasn't able to get these to work in a separate route module
 app.io.route('image', function(req){
@@ -69,7 +81,7 @@ app.io.route('image', function(req){
     debug("MMS mediaUrl: " + mediaUrl );
 
     var msg = "Your dog is on the couch! Go here to see:\n" + app.get('fullHostUrl') + '/remote/' + sid;
-    twilioapp.mms(msg, process.env.testPhone, mediaUrl);
+    //twilioapp.mms(msg, process.env.testPhone, mediaUrl);
 });
 
 app.io.route('video', function(req){
@@ -91,7 +103,7 @@ app.io.route('video', function(req){
         writeToDisk(req.data.video.dataURL, fileName);
         //merge(socket, fileName);  //replace this if  want to use audio with Chrome
     }
-    req.io.emit('open video', app.get('fullHostUrl') + '/' + fileName);
+    req.io.room(req.session.id).broadcast('videoReady', app.get('fullHostUrl') + '/video/' + fileName);
 
 });
 
@@ -104,8 +116,9 @@ function writeToDisk(dataURL, fileName) {
         fileID = 2,
         fileBuffer;
 
+    //increment file name if it already exists
     while (fs.existsSync(filePath)) {
-        filePath = fileRootNameWithBase + '(' + fileID + ').' + fileExtension;
+        filePath = fileRootNameWithBase.split('.')[0] + '(' + fileID + ').' + fileExtension;
         fileID += 1;
     }
 
@@ -131,7 +144,8 @@ if(app.get('env') === 'development') {
     app.io.route('ready', function(req){
         debug("incoming 'ready' on socket");
         req.io.emit('talk', {message: "socket server is alive"});
-    })
+
+    });
 }
 
 //app.use('/', socketRoutes);

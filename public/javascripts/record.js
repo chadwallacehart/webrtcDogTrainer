@@ -1,21 +1,76 @@
 /**
+ * Monitor client module for recording
  * Created by Chad on 10/25/2014.
  */
-/*************FOR RECORDING****************/
+/***********FOR RECORDING****************/
 var mediastream, webrtc = null;            //used by recorder
 var socketio = io.connect();
 var motion = new Motion( $('#localVideo')[0], 15, 5 );
 
+//Use socket.io to connect and join a room
 socketio.on('connect', function() {
     console.log("socket connected");
+    socketio.emit('join', sid);
+});
+
+//Announce when other client joins for debugging
+socketio.on('announce', function(data){
+    console.log(data.message);
+});
+
+//server should send the video file URL
+socketio.on('command', function(message){
+    console.log("command message: " + message);
+    if (message=="record"){
+        window.recordRTC = RecordRTC(mediastream);
+        recordRTC.startRecording();
+    }
+    if (message=="stop"){
+        recordRTC.stopRecording(function () {
+            recordRTC.getDataURL(function (audioVideoWebMURL) {
+                var files = {
+                    audio: {
+                        type: recordRTC.getBlob().type || 'audio/wav',
+                        dataURL: audioVideoWebMURL
+                    }
+                };
+                socketio.emit('video', files);
+                console.log("file type is " + recordRTC.getBlob().type);
+            });
+        });
+    }
 });
 
 
-$('#startButton').click(function() {
-    $('#startButton').hide();
-    $('#stopButton').show();
+function countdown(time, element, callback) {
+    console.log("countdown for " + time);
+    element.prop('disabled', 'disabled');
+    var t = time;
+    var origtext = element.text();
+    var timer = setInterval(function () {
+        if (t == 0) {
+            clearInterval(timer);
+            element.text(origtext);
+            callback();
+        }
+        else
+        {
+            //console.log("tick");
+            element.text(t);
+            t--;
+        }
+    }, 1000);
+}
 
-    motion.start();
+$('#startButton').click(function() {
+
+    countdown($('#timer').val() || 0, $('#startButton'), function(){
+        $('#startButton').hide();
+        $('#stopButton').show();
+        motion.start();
+    });
+
+
 
     $(window).on('motion', function(){
         $("#localVideo").fadeToggle(50);
@@ -25,13 +80,13 @@ $('#startButton').click(function() {
     $(window).on('alert', function(){
         console.log('Alert');
 
-//        window.recordRTC = RecordRTC(mediastream);
-//        recordRTC.startRecording();
-
         webrtc.joinRoom(sid);
         console.log("just joined - " + sid);
 
-        takePicture($("#localVideo")[0]);
+        //take a snapshot and send it on the socket
+        socketio.emit('image',
+                takePicture($("#localVideo")[0])
+        );
 
         motion.stop();
 
@@ -50,33 +105,6 @@ $('#stopButton').click(function() {
 });
 
 
-//socket.on('record', function(){});
-
-function stop(){
-    motion.stop();
-
-    // get audio data-URL
-    recordRTC.stopRecording(function () {
-
-        recordRTC.getDataURL(function (audioVideoWebMURL) {
-            var files = {
-                audio: {
-                    type: recordRTC.getBlob().type || 'audio/wav',
-                    dataURL: audioVideoWebMURL
-                }
-            };
-            socketio.emit('video', files);
-
-            console.log("file type is " + recordRTC.getBlob().type);
-        });
-    });
-}
-
-//server should send the video file URL
-socketio.on('open video', function(message){
-    console.log("Server message: " + message);
-    window.open(message);
-});
 
 //Take a still photo and send it up
 //Inspiration: https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API/Taking_still_photos
@@ -92,8 +120,5 @@ function takePicture(sourceImg) {
         type: 'image/png',
         dataURL: data
     };
-
-    socketio.emit('image', img);
-    console.log(img);
     return (img);
 }

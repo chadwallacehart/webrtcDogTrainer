@@ -23,6 +23,8 @@ $(document).ready( function() {
         }
     };
 
+
+
     webrtc = new SimpleWebRTC({
         localVideoEl: 'localVideo',     // the id/element dom element that will hold "our" video
         remoteVideosEl: 'remoteVideos', // the id/element dom element that will hold remote videos
@@ -33,6 +35,13 @@ $(document).ready( function() {
     webrtc.on('readyToCall', function () {
         $('#startButton').show();
     });
+
+    //test to see if this works
+    /*
+    webrtc.on('channelMessage', function(data){
+        console.log(data);
+    });
+    */
 
     video.onloadeddata = function(){
         //window.stream = video.src; // stream available to console

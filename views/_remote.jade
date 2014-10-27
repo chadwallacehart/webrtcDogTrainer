@@ -18,6 +18,7 @@ html
         h1 You have an alert
         #remoteVideos
         script.
+            console.log(location.search && location.search.split('?')[1]);
             var webrtc = new SimpleWebRTC({
             localVideoEl: 'localVideo',
             remoteVideosEl: 'remoteVideos',

@@ -2,6 +2,8 @@ var debug = require('debug')('webrtcDogRemover');
 var express = require('express.io')();
 var router = express.http(); //.io();
 
+
+var rootDir = process.cwd();
 var sids = [];  //storage for our session ID's
 
 /* GET home page. */
@@ -18,8 +20,9 @@ router.get('/monitor', function(req, res) {
 });
 
 router.get('/remote/:room', function(req, res) {
-    res.render('remote', {room: req.params.room});
+    res.sendfile(rootDir + '/public/remote.html');
 });
+
 
 //Test routes for Twilio we don't want in production
 if(router.get('env') === 'development') {
@@ -49,7 +52,8 @@ router.get('/img/:imageId', function(req, res){
     }
     else{
         var options = {
-            root: __dirname + '/uploads/',
+            //root: __dirname + '../uploads/',
+            root: rootDir + '/uploads/',
             dotfiles: 'deny',
             headers: {
                 'x-timestamp': Date.now(),
@@ -74,7 +78,7 @@ router.get('/video/:fileName', function(req, res) {
     var fileName = req.params.fileName;
 
     var options = {
-        root: __dirname + '/uploads/',
+        root: rootDir + '/uploads/',
         dotfiles: 'deny',
         headers: {
             'x-timestamp': Date.now(),
@@ -82,13 +86,13 @@ router.get('/video/:fileName', function(req, res) {
         }
     };
 
-    res.sendfile(fileName + '.webm', options, function (err) {
+    res.sendfile(fileName, options, function (err) {
         if (err) {
             console.log(err);
             res.status(err.status).end();
         }
         else {
-            console.log('Sent:', fileName + '.webm');
+            console.log('Sent:', fileName);
         }
     });
 });
