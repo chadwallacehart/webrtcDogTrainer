@@ -1,11 +1,12 @@
 /**
  * Monitor client module for recording
+ * Also handles all socket.io logic
  * Created by Chad on 10/25/2014.
  */
 /***********FOR RECORDING****************/
 var mediastream, webrtc = null;            //used by recorder
+var motion;                                //make motion var
 var socketio = io.connect();
-var motion = new Motion( $('#localVideo')[0], 15, 5 );
 
 //Use socket.io to connect and join a room
 socketio.on('connect', function() {
@@ -19,19 +20,19 @@ socketio.on('announce', function(data){
 });
 
 //server should send the video file URL
-socketio.on('command', function(message){
-    console.log("command message: " + message);
-    if (message=="record"){
+socketio.on('broadcast', function(command){
+    console.log("broadcast message: " + command);
+    if (command=="record"){
         window.recordRTC = RecordRTC(mediastream);
         recordRTC.startRecording();
     }
-    if (message=="stop"){
+    if (command=="stop"){
         recordRTC.stopRecording(function () {
             recordRTC.getDataURL(function (audioVideoWebMURL) {
                 var data = {
                     audio: {
                         type: recordRTC.getBlob().type || 'audio/wav',
-                        dataURL: audioVideoWebMURL,
+                        dataURL: audioVideoWebMURL
                     },
                     room: rid
                 };
@@ -56,7 +57,6 @@ function countdown(time, element, callback) {
         }
         else
         {
-            //console.log("tick");
             element.text(t);
             t--;
         }
@@ -66,8 +66,11 @@ function countdown(time, element, callback) {
 $('#startButton').click(function() {
 
     countdown($('#timer').val() || 0, $('#startButton'), function(){
+        $('#setup').hide();
         $('#startButton').hide();
         $('#stopButton').show();
+
+        motion = new Motion( $('#localVideo')[0], $('#motionTimer').val(), $('#motions').val());
         motion.start();
     });
 
@@ -87,7 +90,8 @@ $('#startButton').click(function() {
         //take a snapshot and send it on the socket
         socketio.emit('image', {
                 image: takePicture($("#localVideo")[0]),
-                room: rid
+                room: rid,
+                alertPhone: $('#alertPhone').val()
             });
 
         motion.stop();
@@ -99,9 +103,8 @@ $('#startButton').click(function() {
 });
 
 $('#stopButton').click(function() {
-    $('#startButton').show();
-    $('#stopButton').hide();
     motion.stop();
+    $('#setup').show();
     $('#startButton').show();
     $('#stopButton').hide();
 });

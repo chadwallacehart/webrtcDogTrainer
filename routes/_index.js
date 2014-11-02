@@ -29,7 +29,7 @@ app.route('/monitor', function(req, res) {
 });
 
 app.route('/remote/:room', function(req, res) {
-    res.sendfile(rootDir + '/public/remote.html');
+    res.sendfile(rootDir + '/public/_remote.html');
 });
 
 

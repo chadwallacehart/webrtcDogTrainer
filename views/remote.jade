@@ -1,0 +1,23 @@
+//Created by Chad on 10/19/2014.
+doctype html
+html
+    head
+        title You have an alert
+        meta(charset='UTF-8')
+        meta(name="viewport", content="width=device-width, initial-scale=1")
+        script(src='http://simplewebrtc.com/latest.js')
+        script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js')
+        style(src='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css')
+        style(src='stylesheets/style.css')
+    body
+        #main.container-fluid
+            .row
+                #remoteVideos
+            .row
+                button#record Record
+                button#stop(hidden='hidden') Stop
+            block tessel
+        block scripts
+            script(src='/javascripts/remote.js')
+
+

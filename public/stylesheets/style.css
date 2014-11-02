@@ -1,4 +1,11 @@
-/*taken from https://github.com/webrtcHacks/cssMirror */
+video{
+    /*height: 100%;*/
+}
+.mirror{
+    transform: scale(-1, 1);
+    -webkit-transform: scale(-1, 1);
+}
+/*taken from https://github.com/webrtcHacks/cssMirror
 #content{
     position: absolute;
     height: 98%;
@@ -13,8 +20,8 @@ video{
     position: absolute;
     height: 100%;
 
-    transform: scale(-1, 1);            /*For Firefox (& IE) */
-    -webkit-transform: scale(-1, 1);     /*for Chrome & Opera (& Safari) */
+    transform: scale(-1, 1);
+    -webkit-transform: scale(-1, 1);
 }
 table, th, td {
     border: 1px solid grey;
@@ -43,3 +50,4 @@ button{
     color: #fbfbfb;
     background-color: #ff4f14;
 }
+*/

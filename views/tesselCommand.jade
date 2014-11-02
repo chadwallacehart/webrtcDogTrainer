@@ -1,0 +1,13 @@
+//
+   Created by Chad on 11/2/2014.
+
+extends remote
+
+block tessel
+    span Tessel REST Command
+    input#restUrl(value="http://192.168.10.120:8080/forward/5")
+    button#execute.btn Go
+
+block scripts
+    script(src='/javascripts/remote.js')
+    script(src='/javascripts/tesselCommand.js')

@@ -15,7 +15,7 @@ if(router.get('env') === 'development') {
 
 //SMS test message
     router.get('/sms', function (req, res) {
-        twilioapp.sms(testPhone, "bugging you with sms! \n" +  req.session.id);
+        twilioapp.sms(testPhone, "bugging you with sms! \n");
         res.end("SMS sent");
     });
 
@@ -23,7 +23,7 @@ if(router.get('env') === 'development') {
     router.get('/mms', function (req, res) {
         mediaLink = 'http://upload.wikimedia.org/wikipedia/commons/f/f7/UKC_Olde_English_Bulldogge_at_8_years_old.jpg';
 
-        var message = "You have an alert! \n" + req.session.id + "\nGo here to do something about it: \n" + req.app.get('fullHostUrl') + '/remote.html';
+        var message = "You have an alert! \n" + req.session.id + "\nGo here to do something about it: \n" + req.app.get('fullHostUrl') + '/remote';
         twilioapp.mms(message, testPhone, mediaLink);
         res.end("MMS sent");
     });

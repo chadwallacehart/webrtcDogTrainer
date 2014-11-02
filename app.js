@@ -25,7 +25,7 @@ app.use(favicon(__dirname + '/public/favicon.ico'));
 //app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));    //this not working
 
-var adminId = "";
+var adminId = "";                   //used for hold an admin room
 
 /********************ROUTES****************************/
 
@@ -47,12 +47,24 @@ app.get('/:' + process.env.adminAuth, function (req, res){
 
 //Render the monitor page
 app.get('/monitor/:room', function(req, res) {
-    debug("Main monitor page - room ID: " + req.params.room);
-    res.render('monitor', {sessId: req.params.room});
+    var room = req.params.room;
+    debug("Main monitor page - room ID: " + room);
+    if (room == adminId){
+        res.render('tesselProxy',{roomId: room} );
+    }
+    else{
+        res.render('monitor', {roomId: room});
+    }
 });
 
 app.get('/remote/:room', function(req, res) {
-    res.sendfile(__dirname + '/public/remote.html');
+    var room = req.params.room;
+    if (room == adminId){
+        res.render('tesselCommand' );
+    }
+    else{
+        res.render('remote');
+    }
 });
 
 //Test routes for Twilio we don't want in production
@@ -89,7 +101,7 @@ if(process.env.NODE_ENV === 'development') {
 
 }
 
-//serve images url for twilio MMS based on ssid
+//serve images url for twilio MMS
 app.get('/image/:imageId', function(req, res){
 
     var imageId = req.params.imageId;
@@ -152,9 +164,10 @@ app.io.route('join', function(req) {
     debug("New client in the " + req.data + " room. ");
 });
 
-app.io.route('command', function(req){
+//broadcast any incoming 'broadcast' message
+app.io.route('broadcast', function(req){
     debug("command: " + req.data.command + " for room " + req.data.room);
-    req.io.room(req.data.room).broadcast("command", req.data.command);
+    req.io.room(req.data.room).broadcast("broadcast", req.data.command);
 });
 
 //Wasn't able to get these to work in a separate route module
@@ -183,7 +196,7 @@ app.io.route('image', function(req){
 
     //need the right room ID here
     var msg = "Your dog is on the couch! Go here to see:\n" + app.get('fullHostUrl') + '/remote/' + req.data.room;
-    twilioapp.mms(msg, process.env.testPhone, mediaUrl);
+    twilioapp.mms(msg, req.data.alertPhone, mediaUrl);
 });
 
 app.io.route('video', function(req){

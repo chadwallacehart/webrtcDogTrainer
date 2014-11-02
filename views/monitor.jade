@@ -1,28 +1,38 @@
 doctype html
 html
     head
-        meta(charset="UTF-8")
         title Motion Monitor
-        meta(name="viewport", content="width=device-width, initial-scale=1")
+        meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1")
         style(src='http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css')
+        style(src='/stylesheets/style.css')
         script(src="https://www.webrtc-experiment.com/RecordRTC.js")
         script(src="https://cdn.socket.io/socket.io-1.1.0.js")
         script(src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js")
         script(src="http://simplewebrtc.com/latest.js")
+
     body
-        #content
-        #stats
-        video#localVideo(autoplay="", muted="")
-        video#remoteVideos(hidden="")
-        button#startButton Start!
-        button#stopButton(hidden="hidden") Stop
-        | start delay
-        input#timer(value="30")
-        | phone to alert
-        input#phone
+        .container-fluid
+            .row
+                video#localVideo.mirror(autoplay="", muted="")
+            .row
+                form(name="setup", role="form")
+                    #setup.form-group
+                        p Setup:
+                        | Wait
+                        input#timer(value="30")
+                        | seconds to start and then alert after
+                        input#motions(value="5")
+                        | events within
+                        input#motionTimer(value="15")
+                        | seconds before sending an alert to
+                        input#alertPhone
+            .row
+                button#startButton.btn.btn-success.btn-block Start!
+                button#stopButton.btn.btn-warning.btn-block(hidden="hidden") Stop
         script.
-            var rid = !{JSON.stringify(sessId)};
-        script(src="/javascripts/motion.js")
-        script(src="/javascripts/record.js")
-        script(src="/javascripts/webrtc.js")
+            var rid = !{JSON.stringify(roomId)};
+        block scripts
+            script(src="/javascripts/monitor.js")
+            script(src="/javascripts/motion.js")
+            script(src="/javascripts/webrtc.js")

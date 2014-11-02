@@ -1,5 +1,4 @@
 {
-    "sessionSecret": "webrtcHacks-Yeah!",
     "hostPath": "http://chadwallacehart-webrtcDogRemover.jit.su",
     "NODE_ENV": "production",
     "twilioToken": "75f370df1f6a19bfe6b3fb4e65b101a8",
@@ -7,5 +6,6 @@
     "twilioPhone": "+16176487636",
     "testPhone": "+16177948881",
     "DEBUG": "webrtcDogRemover",
-    "SUBDOMAIN": "chadwallacehart-webrtcdogremover"
+    "SUBDOMAIN": "chadwallacehart-webrtcdogremover",
+    "adminAuth": "chadadmin"
 }

@@ -79,7 +79,6 @@
         }
     }
 
-
     $(window).on('motion', function(){
         var now = new Date();
         if (now - times[0] < timeWindow){
