@@ -20,13 +20,13 @@ socketio.on('announce', function(data){
 });
 
 //server should send the video file URL
-socketio.on('broadcast', function(command){
-    console.log("broadcast message: " + command);
-    if (command=="record"){
+socketio.on('broadcast', function(message){
+    console.log("broadcast message: " + JSON.stringify(message));
+    if (message.command=="record"){
         window.recordRTC = RecordRTC(mediastream);
         recordRTC.startRecording();
     }
-    if (command=="stop"){
+    if (message.command=="stop"){
         recordRTC.stopRecording(function () {
             recordRTC.getDataURL(function (audioVideoWebMURL) {
                 var data = {

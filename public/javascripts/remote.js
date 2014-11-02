@@ -19,7 +19,7 @@ webrtc.on('readyToCall', function () {
 });
 
 socketio.on('broadcast', function(data){
-    console.log("broadcast: " + data);
+    console.log("broadcast: " + JSON.stringify(data));
 });
 
 socketio.on('videoReady', function(data){

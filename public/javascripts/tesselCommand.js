@@ -8,7 +8,7 @@ $('#execute').click(function(){
     socketio.emit("broadcast", {command: "tessel", url: $("#restUrl").val(), room: room});
 
     socketio.on('broadcast', function(message){
-        console.log("command message: " + message);
+        console.log("broadcast message: " + JSON.stringify(message));
         if (message.command=="tesselResult"){
                 console.log("Tessel result: "  + message.data);
         }
