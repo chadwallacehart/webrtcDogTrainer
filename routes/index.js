@@ -1,22 +1,31 @@
 var debug = require('debug')('webrtcDogRemover');
 var express = require('express.io')();
 var router = express.http(); //.io();
-
+var shortId = require('shortid');
 
 var rootDir = process.cwd();
-var sids = [];  //storage for our session ID's
+
+//var app = require('../app');
+
+//repplace "router.get" with "app.io.route"
 
 /* GET home page. */
 router.get('/', function(req, res) {
-    debug("Main monitor page - " + req.session.id);
+    debug("Home - session ID: " + req.session.id);
     //had to redirect since rendering was not passing var
     res.redirect('/monitor');
 });
 
 router.get('/monitor', function(req, res) {
-    debug("Main monitor page - " + req.session.id);
-    res.render('monitor', {sessId: req.session.id});
-    sids.push(req.session.id);
+    var uid = shortId.generate();
+
+    //@ToDO change this to REDIS HSET like function
+    global.db.push({sid: req.session.id, 'rid': uid, 'imgId': "", 'vidId': ""});
+    debug(global.db);
+
+    debug("Main monitor page - room ID: " + uid);
+    res.render('monitor', {sessId: uid});
+    //sids.push(req.session.id);
 });
 
 router.get('/remote/:room', function(req, res) {
@@ -38,6 +47,21 @@ if(router.get('env') === 'development') {
     router.get('/echo/:message', function(req, res){
         res.send(req.params.message);
     });
+
+    //fake database test - generate an id
+    router.get('/db', function(req, res){
+        var id = shortId.generate();
+        global.db.push( {sid: id, rid: shortId.generate()});
+        res.send(id);
+        debug(global.db);
+    });
+
+    //fake database test - pull a value
+    router.get('/db/:sid', function(req, res){
+        var i = global.db.map(function(e) {return e.sid}).indexOf(req.params.sid);
+        res.send(global.db[i].rid);
+    });
+
 }
 
 //serve images url for twilio MMS based on ssid
@@ -45,7 +69,7 @@ router.get('/image/:imageId', function(req, res){
 
     var imageId = req.params.imageId;
     //var ssidCheck = fileName.split('.')[0];
-    debug("ssidCheck: +" + imageId);
+    debug("ImageId Check: +" + imageId);
 
     var options = {
         //root: __dirname + '../uploads/',
@@ -87,7 +111,7 @@ router.get('/video/:fileName', function(req, res) {
             res.status(err.status).end();
         }
         else {
-            console.log('Sent:', fileName);
+            debug('Sent:', fileName);
         }
     });
 });

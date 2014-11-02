@@ -10,7 +10,7 @@ var motion = new Motion( $('#localVideo')[0], 15, 5 );
 //Use socket.io to connect and join a room
 socketio.on('connect', function() {
     console.log("socket connected");
-    socketio.emit('join', sid);
+    socketio.emit('join', rid);
 });
 
 //Announce when other client joins for debugging
@@ -80,8 +80,8 @@ $('#startButton').click(function() {
     $(window).on('alert', function(){
         console.log('Alert');
 
-        webrtc.joinRoom(sid);
-        console.log("just joined - " + sid);
+        webrtc.joinRoom(rid);
+        console.log("just joined - " + rid);
 
         //take a snapshot and send it on the socket
         socketio.emit('image',

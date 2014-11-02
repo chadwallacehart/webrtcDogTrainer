@@ -1,16 +1,20 @@
-var express = require('express.io');
+var express = require('express.io');        //normal express routes + socket.io routing
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var shortId = require('shortid');           //used to generate unique IDs
+redis = require('redis');
+
 
 var fs = require('fs');
 var debug = require('debug')('webrtcDogRemover');
 var twilioapp = require('./twilioapp');
 
-var app = express();
-app.http().io();
+var app = express().http().io();        //Connect all these to app
+
+global.db = [];         //define a fake global fake database object
 
 var routes = require('./routes/index');
 var twilioRoutes = require('./routes/twilio');
@@ -20,21 +24,45 @@ var twilioRoutes = require('./routes/twilio');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');             //had to change this from ejs
 
-// uncomment after placing your favicon in /public
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));    //this not working
-app.use(express.session({secret: process.env.sessionSecret}));
+
+
+/********************REDIS DATABASE****************************/
+RedisStore = express.io.RedisStore;
+var db = redis.createClient(process.env.redisPort, process.env.redisAddr );
+db.auth(process.env.redisAuth, function(err) {
+    if (err) {
+        throw err;
+    }
+});
+
+db.on('ready', function () {
+    app.use(express.session({
+        secret: process.env.sessionSecret,
+        store: new RedisStore({ client: db
+        })
+    }));
+
+    app.io.set('store', new express.io.RedisStore({
+        redisPub: db,
+        redisSub: db,
+        redisClient: db
+    }));
+
+    debug("redis ready");
+});
+
+
+
 
 /********************ROUTES****************************/
 
 app.use('/', routes);
 app.use('/', twilioRoutes);
-
-//object to make sure routes don't get flooded by teh same session
-var fileNames = [];
 
 // Setup the ready route, join room and broadcast to room.
 app.io.route('join', function(req) {
@@ -55,6 +83,9 @@ app.io.route('command', function(req){
 app.io.route('image', function(req){
 
     var sid = req.session.id;
+    var imageId = shortId.generate();
+
+
     var filetype = 'png';
     var filename = sid + '.'+ filetype;
 /*
@@ -68,7 +99,9 @@ app.io.route('image', function(req){
     }
 */
     req.io.emit('status', "saving image");
-    writeToDisk(req.data.dataURL, sid + '.'+ filetype);
+    writeToDisk(req.data.dataURL, imageId + '.'+ filetype);
+
+    //save to fake DB
 
     var mediaUrl;
     if(process.env.NODE_ENV === 'development'){
@@ -89,10 +122,14 @@ app.io.route('video', function(req){
     debug("incoming socket - video");
     req.io.emit('status', "saving video");
 
+    var vidId = shortId.generate();
+
     //To DO: write the filename based on teh data.audio.type
     var filetype = 'webm';
 
-    fileName = req.session.id + '.' + filetype;
+
+
+    fileName = vidId + '.' + filetype;
 
     writeToDisk(req.data.audio.dataURL, fileName);
 
@@ -102,6 +139,7 @@ app.io.route('video', function(req){
         //merge(socket, fileName);  //replace this if  want to use audio with Chrome
     }
     debug("recording url:" + app.get('fullHostUrl') + '/video/' + fileName);
+    //@ToDo change session.id below to room id - will need to lookup shomehow
     req.io.room(req.session.id).broadcast('videoReady', app.get('fullHostUrl') + '/video/' + fileName);
 
 });
