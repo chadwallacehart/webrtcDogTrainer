@@ -1,4 +1,4 @@
-var debug = require('debug')('webrtcDogRemover');
+var debug = require('debug')('webrtcDogTrainer');
 var express = require('express.io')();
 var router = express.http(); //.io();
 var shortId = require('shortid');

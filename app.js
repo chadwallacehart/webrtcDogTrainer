@@ -1,12 +1,12 @@
 var express = require('express.io');        //normal express routes + socket.io routing
 var path = require('path');
 var favicon = require('serve-favicon');
-var cookieParser = require('cookie-parser');
+//var cookieParser = require('cookie-parser');
 //var bodyParser = require('body-parser');
 var shortId = require('shortid');           //used to generate unique IDs
 
 var fs = require('fs');
-var debug = require('debug')('webrtcDogRemover');
+var debug = require('debug')('webrtcDogTrainer');
 var twilioapp = require('./twilioapp');
 
 var app = express().http().io();        //Connect all these to app

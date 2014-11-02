@@ -2,7 +2,7 @@
  * Route for express.io socket messages
  * Created by Chad on 10/25/2014.
  */
-var debug = require('debug')('webrtcDogRemover');
+var debug = require('debug')('webrtcDogTrainer');
 //var express = require('express.io')();
 //var app = express.http().io();
 var twilioapp = require('../twilioapp');
