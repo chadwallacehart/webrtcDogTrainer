@@ -2,18 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="800578f1-0d10-4ea2-8e60-c6877d297a10" name="Default" comment="">
-      <change type="MOVED" beforePath="C:\Users\Chad\Code\GitHub\webrtcDogTrainer\.idea\record.iml" afterPath="$PROJECT_DIR$/.idea/webrtcDogTrainer.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="$PROJECT_DIR$/.idea/.name" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/_index.js" afterPath="$PROJECT_DIR$/routes/_index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/_socket.js" afterPath="$PROJECT_DIR$/routes/_socket.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/jitsuenv.json" afterPath="$PROJECT_DIR$/jitsuenv.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/twilio.js" afterPath="$PROJECT_DIR$/routes/twilio.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/tesselCommand.js" afterPath="$PROJECT_DIR$/public/javascripts/tesselCommand.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/tesselProxy.js" afterPath="$PROJECT_DIR$/public/javascripts/tesselProxy.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/twilioapp.js" afterPath="$PROJECT_DIR$/twilioapp.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/www" afterPath="$PROJECT_DIR$/bin/www" />
     </list>
     <ignored path="LevyMove.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -48,16 +41,6 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="_index.js" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/routes/_index.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2125">
-                  <caret line="0" column="30" selection-start-line="0" selection-start-column="30" selection-end-line="0" selection-end-column="30" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
           <file leaf-file-name="twilio.js" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/routes/twilio.js">
               <provider selected="true" editor-type-id="text-editor">
@@ -68,11 +51,21 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="twilioapp.js" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="twilioapp.js" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/twilioapp.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.19833334" vertical-offset="0" max-vertical-offset="833">
-                  <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="37" selection-end-column="32" />
+                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="833">
+                  <caret line="27" column="38" selection-start-line="27" selection-start-column="35" selection-end-line="27" selection-end-column="38" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="tesselProxy.js" pinned="false" current="true" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/public/javascripts/tesselProxy.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.31166667" vertical-offset="0" max-vertical-offset="600">
+                  <caret line="11" column="3" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
                   <folding />
                 </state>
               </provider>
@@ -115,7 +108,7 @@
           <file leaf-file-name="monitor.js" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/public/javascripts/monitor.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="2278">
+                <state vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="2210">
                   <caret line="7" column="60" selection-start-line="7" selection-start-column="60" selection-end-line="7" selection-end-column="60" />
                   <folding />
                 </state>
@@ -125,18 +118,8 @@
           <file leaf-file-name="tesselProxy.jade" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/views/tesselProxy.jade">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="255">
+                <state vertical-scroll-proportion="-4.08" vertical-offset="0" max-vertical-offset="255">
                   <caret line="6" column="41" selection-start-line="6" selection-start-column="41" selection-end-line="6" selection-end-column="41" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="tesselProxy.js" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/public/javascripts/tesselProxy.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="187" max-vertical-offset="289">
-                  <caret line="11" column="3" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
                   <folding />
                 </state>
               </provider>
@@ -145,27 +128,27 @@
           <file leaf-file-name="remote.js" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/public/javascripts/remote.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="205" max-vertical-offset="782">
-                  <caret line="30" column="26" selection-start-line="30" selection-start-column="26" selection-end-line="30" selection-end-column="26" />
+                <state vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="782">
+                  <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="tesselCommand.js" pinned="false" current="false" current-in-tab="false">
+          <file leaf-file-name="tesselCommand.js" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/public/javascripts/tesselCommand.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="272">
-                  <caret line="10" column="3" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="3" />
+                <state vertical-scroll-proportion="0.255" vertical-offset="0" max-vertical-offset="600">
+                  <caret line="9" column="45" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="45" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="tesselCommand.jade" pinned="false" current="false" current-in-tab="true">
+          <file leaf-file-name="tesselCommand.jade" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/views/tesselCommand.jade">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.36823106" vertical-offset="0" max-vertical-offset="554">
+                <state vertical-scroll-proportion="-8.16" vertical-offset="0" max-vertical-offset="306">
                   <caret line="12" column="47" selection-start-line="12" selection-start-column="47" selection-end-line="12" selection-end-column="47" />
                   <folding />
                 </state>
@@ -218,11 +201,9 @@
         <option value="$PROJECT_DIR$/public/stylesheets/style.css" />
         <option value="$PROJECT_DIR$/public/remote.html" />
         <option value="$PROJECT_DIR$/views/remote.jade" />
-        <option value="$PROJECT_DIR$/public/javascripts/tesselCommand.js" />
         <option value="$PROJECT_DIR$/public/javascripts/motion.js" />
         <option value="$PROJECT_DIR$/views/monitor.jade" />
         <option value="$PROJECT_DIR$/views/tesselProxy.jade" />
-        <option value="$PROJECT_DIR$/public/javascripts/tesselProxy.js" />
         <option value="$PROJECT_DIR$/public/javascripts/monitor.js" />
         <option value="$PROJECT_DIR$/views/tesselCommand.jade" />
         <option value="$PROJECT_DIR$/jitsuenv.json" />
@@ -231,8 +212,10 @@
         <option value="$PROJECT_DIR$/bin/www" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/app.js" />
-        <option value="$PROJECT_DIR$/twilioapp.js" />
         <option value="$PROJECT_DIR$/routes/twilio.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/tesselProxy.js" />
+        <option value="$PROJECT_DIR$/twilioapp.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/tesselCommand.js" />
       </list>
     </option>
   </component>
@@ -301,7 +284,53 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webrtcDogTrainer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webrtcDogTrainer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="routes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webrtcDogTrainer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webrtcDogTrainer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webrtcDogTrainer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="webrtcDogTrainer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javascripts" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -716,6 +745,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.1013288" vertical-offset="0" max-vertical-offset="935">
           <caret line="39" column="10" selection-start-line="39" selection-start-column="10" selection-end-line="39" selection-end-column="10" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -727,13 +757,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/remote.jade">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.6" vertical-offset="0" max-vertical-offset="493">
-          <caret line="20" column="48" selection-start-line="20" selection-start-column="48" selection-end-line="20" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/motion.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.25976232" vertical-offset="255" max-vertical-offset="1785">
@@ -741,58 +764,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/remote.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="205" max-vertical-offset="782">
-          <caret line="30" column="26" selection-start-line="30" selection-start-column="26" selection-end-line="30" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/monitor.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="2278">
-          <caret line="7" column="60" selection-start-line="7" selection-start-column="60" selection-end-line="7" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/monitor.jade">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="137" max-vertical-offset="731">
           <caret line="25" column="39" selection-start-line="25" selection-start-column="39" selection-end-line="25" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/tesselProxy.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="255">
-          <caret line="11" column="3" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/tesselProxy.jade">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="255">
-          <caret line="6" column="41" selection-start-line="6" selection-start-column="41" selection-end-line="6" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/tesselCommand.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="238">
-          <caret line="10" column="3" selection-start-line="10" selection-start-column="3" selection-end-line="10" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/tesselCommand.jade">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36823106" vertical-offset="0" max-vertical-offset="554">
-          <caret line="12" column="47" selection-start-line="12" selection-start-column="47" selection-end-line="12" selection-end-column="47" />
           <folding />
         </state>
       </provider>
@@ -845,10 +820,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
+    <entry file="file://$PROJECT_DIR$/views/remote.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5304">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.59130436" vertical-offset="0" max-vertical-offset="575">
+          <caret line="20" column="48" selection-start-line="20" selection-start-column="48" selection-end-line="20" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/tesselCommand.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.16" vertical-offset="0" max-vertical-offset="306">
+          <caret line="12" column="47" selection-start-line="12" selection-start-column="47" selection-end-line="12" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/tesselProxy.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.08" vertical-offset="0" max-vertical-offset="255">
+          <caret line="6" column="41" selection-start-line="6" selection-start-column="41" selection-end-line="6" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/monitor.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="2278">
+          <caret line="7" column="60" selection-start-line="7" selection-start-column="60" selection-end-line="7" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/remote.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="782">
+          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/twilioapp.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="833">
+          <caret line="27" column="38" selection-start-line="27" selection-start-column="35" selection-end-line="27" selection-end-column="38" />
           <folding />
         </state>
       </provider>
@@ -861,10 +876,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/twilioapp.js">
+    <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.19833334" vertical-offset="0" max-vertical-offset="833">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="37" selection-end-column="32" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5304">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/tesselCommand.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.255" vertical-offset="0" max-vertical-offset="600">
+          <caret line="9" column="45" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/tesselProxy.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.31166667" vertical-offset="0" max-vertical-offset="600">
+          <caret line="11" column="3" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
           <folding />
         </state>
       </provider>

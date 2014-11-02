@@ -25,7 +25,7 @@ exports.mms = function(msg, to, url){
     }, function (err, message) {
         if (err)
             debug(err);
-        debug("MMS ID: " + message);    //was message.sid
+        debug("MMS ID: " + message.sid);    //was message.sid
     });
     debug("sent MMS");
 };
@@ -38,6 +38,6 @@ exports.sms = function(smsto, smsmsg){
     }, function (err, message) {
         if (err)
             debug(err);
-        debug("SMS ID:" + message); //was message.sid
+        debug("SMS ID:" + message.sid); //was message.sid
     });
 };

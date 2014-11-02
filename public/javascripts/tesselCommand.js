@@ -3,9 +3,15 @@
  */
 
     //Call a rest command - used for ROVER control
+var room = location.pathname.split('/')[2]; //pull the roomname from the url
 $('#execute').click(function(){
-    $.get($("#restUrl").val(), function(data, status){
-        console.log("GET status:" + status + " : " + data);
-        socketio.emit("broadcast", {command: "tessel", url: $("#restUrl").val(), room: room});
-    })
+    socketio.emit("broadcast", {command: "tessel", url: $("#restUrl").val(), room: room});
+
+    socketio.on('broadcast', function(message){
+        console.log("command message: " + message);
+        if (message.command=="tesselResult"){
+                console.log("Tessel result: "  + message.data);
+        }
+    });
 });
+

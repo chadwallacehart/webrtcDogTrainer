@@ -166,7 +166,7 @@ app.io.route('join', function(req) {
 
 //broadcast any incoming 'broadcast' message
 app.io.route('broadcast', function(req){
-    debug("command: " + req.data.command + " for room " + req.data.room);
+    debug("broadcast message: " + req.data + " for room " + req.data.room);
     req.io.room(req.data.room).broadcast("broadcast", req.data.command);
 });
 
