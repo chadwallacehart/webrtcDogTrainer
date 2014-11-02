@@ -32,13 +32,7 @@ REST url:<input id="restUrl" type="text"/>
     webrtc.on('readyToCall', function () {
         webrtc.joinRoom(room);
         console.log('Joined room ' + room);
-
-        //webrtc.sendDirectlyToAll('hello', {foo: "bar"});
     });
-
-    /*webrtc.on('joinedRoom', function () {
-     webrtc.sendDirectlyToAll("hello", "chat", "hello");
-     });*/
 
     socketio.on('command', function(data){
         console.log("command: " + data);
@@ -64,6 +58,9 @@ REST url:<input id="restUrl" type="text"/>
 
 </script>
 <script>
+
+
+
     //Call a rest command - used for ROVER control
     $('#execute').click(function(){
         $.get($("#restUrl").val(), function(data, status){

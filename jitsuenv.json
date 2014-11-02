@@ -7,8 +7,5 @@
     "twilioPhone": "+16176487636",
     "testPhone": "+16177948881",
     "DEBUG": "webrtcDogRemover",
-    "SUBDOMAIN": "chadwallacehart-webrtcdogremover",
-    "redisPort": "6379",
-    "redisAddr": "redis-chadwallacehart-3178585686.redis.irstack.com",
-    "redisAuth": "redis-chadwallacehart-3178585686.redis.irstack.com:f327cfe980c971946e80b8e975fbebb4"
+    "SUBDOMAIN": "chadwallacehart-webrtcdogremover"
 }

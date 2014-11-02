@@ -28,13 +28,14 @@ socketio.on('command', function(message){
     if (message=="stop"){
         recordRTC.stopRecording(function () {
             recordRTC.getDataURL(function (audioVideoWebMURL) {
-                var files = {
+                var data = {
                     audio: {
                         type: recordRTC.getBlob().type || 'audio/wav',
-                        dataURL: audioVideoWebMURL
-                    }
+                        dataURL: audioVideoWebMURL,
+                    },
+                    room: rid
                 };
-                socketio.emit('video', files);
+                socketio.emit('video', data);
                 console.log("file type is " + recordRTC.getBlob().type);
             });
         });
@@ -84,9 +85,10 @@ $('#startButton').click(function() {
         console.log("just joined - " + rid);
 
         //take a snapshot and send it on the socket
-        socketio.emit('image',
-                takePicture($("#localVideo")[0])
-        );
+        socketio.emit('image', {
+                image: takePicture($("#localVideo")[0]),
+                room: rid
+            });
 
         motion.stop();
 
