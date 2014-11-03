@@ -41,7 +41,7 @@ app.get('/', function(req, res) {
 
 app.get('/:' + process.env.adminAuth, function (req, res){
    adminId = shortId.generate();
-   debug("Admin login");
+   debug("Admin login set to " + adminId);
    res.redirect('/monitor/' + adminId);
 });
 
