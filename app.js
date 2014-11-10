@@ -1,8 +1,6 @@
 var express = require('express.io');        //normal express routes + socket.io routing
 var path = require('path');
 var favicon = require('serve-favicon');
-//var cookieParser = require('cookie-parser');
-//var bodyParser = require('body-parser');
 var shortId = require('shortid');           //used to generate unique IDs
 
 var fs = require('fs');
@@ -11,25 +9,19 @@ var twilioapp = require('./twilioapp');
 
 var app = express().http().io();        //Connect all these to app
 
-//var routes = require('./routes/index');
 var twilioRoutes = require('./routes/twilio');
-//var socketRoutes = require('./routes/socket')(app); //moved to below
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');             //had to change this from ejs
 
 app.use(favicon(__dirname + '/public/favicon.ico'));
-//app.use(bodyParser.json());
-//app.use(bodyParser.urlencoded({ extended: false }));
-//app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));    //this not working
 
 var adminId = "";                   //used for hold an admin room
 
 /********************ROUTES****************************/
 
-//app.use('/', routes);
 app.use('/', twilioRoutes);
 
 /* GET home page. */
@@ -204,17 +196,17 @@ app.io.route('video', function(req){
     debug("incoming socket - video");
     req.io.emit('status', "saving video");
 
-    var vidId = shortId.generate();
+    var vidId = shortId.generate();     //get a short, unique ID for the filename
 
     //To DO: write the filename based on teh data.audio.type
     var filetype = 'webm';
 
-
-    fileName = vidId + '.' + filetype;
+    var fileName = vidId + '.' + filetype;
 
     writeToDisk(req.data.audio.dataURL, fileName);
 
     // if it is chrome
+    // @ToDo - set the monitor client to record video in Chrome instead of audio
     if (req.data.video) {
         writeToDisk(req.data.video.dataURL, fileName);
         //merge(socket, fileName);  //replace this if  want to use audio with Chrome
@@ -264,10 +256,6 @@ if(app.get('env') === 'development') {
 
     });
 }
-
-//app.use('/', socketRoutes);
-//app.use('/users', users);
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

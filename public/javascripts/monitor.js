@@ -11,7 +11,7 @@ var socketio = io.connect();
 //Use socket.io to connect and join a room
 socketio.on('connect', function() {
     console.log("socket connected");
-    socketio.emit('join', rid);
+    socketio.emit('join', room);
 });
 
 //Announce when other client joins for debugging
@@ -30,11 +30,11 @@ socketio.on('broadcast', function(message){
         recordRTC.stopRecording(function () {
             recordRTC.getDataURL(function (audioVideoWebMURL) {
                 var data = {
-                    audio: {
+                    audio: {        //audio&video on Firefox, just audio on Chrome
                         type: recordRTC.getBlob().type || 'audio/wav',
                         dataURL: audioVideoWebMURL
                     },
-                    room: rid
+                    room: room
                 };
                 socketio.emit('video', data);
                 console.log("file type is " + recordRTC.getBlob().type);
@@ -74,8 +74,6 @@ $('#startButton').click(function() {
         motion.start();
     });
 
-
-
     $(window).on('motion', function(){
         $("#localVideo").fadeToggle(50);
         $("#localVideo").fadeToggle(50);
@@ -84,13 +82,13 @@ $('#startButton').click(function() {
     $(window).on('alert', function(){
         console.log('Alert');
 
-        webrtc.joinRoom(rid);
-        console.log("just joined - " + rid);
+        webrtc.joinRoom(room);
+        console.log("just joined - " + room);
 
         //take a snapshot and send it on the socket
         socketio.emit('image', {
                 image: takePicture($("#localVideo")[0]),
-                room: rid,
+                room: room,
                 alertPhone: $('#alertPhone').val()
             });
 

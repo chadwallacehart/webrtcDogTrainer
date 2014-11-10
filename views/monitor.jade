@@ -31,7 +31,7 @@ html
                 button#startButton.btn.btn-success.btn-block Start!
                 button#stopButton.btn.btn-warning.btn-block(hidden="hidden") Stop
         script.
-            var rid = !{JSON.stringify(roomId)};
+            var room = !{JSON.stringify(roomId)};!{JSON.stringify(roomId)};
         block scripts
             script(src="/javascripts/monitor.js")
             script(src="/javascripts/motion.js")

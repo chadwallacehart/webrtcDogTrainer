@@ -1,4 +1,5 @@
 /**
+ * Remote viewing client app
  * Created by Chad on 10/26/2014.
  */
 var room = location.pathname.split('/')[2]; //pull the roomname from the url

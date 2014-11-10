@@ -1,25 +1,19 @@
 /**
+ * SimpleWebRTC setup
  * Created by Chad on 10/25/2014.
  */
-    //SimpleWebRTC setup
 
 $(document).ready( function() {
 
-    var video = $('#localVideo')[0];   //use var so we only call jQuery selectors once
-    var w =  1280,                  //video width
-        h = 720;                //video width
+    var video = $('#localVideo')[0];    //use var so we only call jQuery selectors once
+    var w =  1280,                      //video width
+    h = 720;                            //video width
 
     var constraints = {
         audio: true,
         video: {
-            mandatory: {
-                minWidth: w *.5,
-                minHeight: h *.5
-            },
-            optional: [
-                {width: w},
-                {height: h}
-            ]
+            mandatory: { minWidth: w *.5, minHeight: h *.5 },
+            optional: [ {width: w}, {height: h}]
         }
     };
 
@@ -30,15 +24,9 @@ $(document).ready( function() {
         media: constraints
     });
 
-    webrtc.on('readyToCall', function () {
-        $('#startButton').show();
-    });
-
     video.onloadeddata = function(){
-        //window.stream = video.src; // stream available to console
         mediastream = webrtc.webrtc.localStreams[0];
-        //console.log(mediastream);
-        $('#startButton').show();
+        $('#startButton').show();       //let the user start when self-video is loaded
     };
 
     video.onloadedmetadata = function(){
